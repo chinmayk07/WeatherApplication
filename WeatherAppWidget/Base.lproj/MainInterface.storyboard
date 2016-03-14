@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="facebook.png" translatesAutoresizingMaskIntoConstraints="NO" id="LBt-wG-aVy">
+                                <rect key="frame" x="0.0" y="26" width="75" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="5wW-fm-63e"/>
+                                    <constraint firstAttribute="width" constant="75" id="btc-Vg-4fi"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISX-Cf-wjB">
+                                <rect key="frame" x="91" y="26" width="117" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="FNg-93-D9q"/>
+                                    <constraint firstAttribute="width" constant="117" id="HuG-XU-Ito"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRk-S4-4Nm">
+                                <rect key="frame" x="91" y="73" width="117" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Gg8-PM-qc1"/>
+                                    <constraint firstAttribute="width" constant="117" id="WIr-ls-WNU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.96569242944043365" green="0.97501202373654117" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ISX-Cf-wjB" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="26" id="7CU-U1-VHd"/>
+                            <constraint firstItem="LBt-wG-aVy" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="26" id="Uu5-N3-7dV"/>
+                            <constraint firstItem="LBt-wG-aVy" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="VRL-pO-5z4"/>
+                            <constraint firstItem="NRk-S4-4Nm" firstAttribute="top" secondItem="ISX-Cf-wjB" secondAttribute="bottom" constant="7" id="YmC-Ea-OHV"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="LBt-wG-aVy" secondAttribute="bottom" constant="10" id="bkH-Vi-xcQ"/>
+                            <constraint firstItem="ISX-Cf-wjB" firstAttribute="leading" secondItem="LBt-wG-aVy" secondAttribute="trailing" constant="16" id="khX-Ym-e60"/>
+                            <constraint firstItem="NRk-S4-4Nm" firstAttribute="leading" secondItem="LBt-wG-aVy" secondAttribute="trailing" constant="16" id="r3l-0d-8tZ"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="121"/>
+                    <connections>
+                        <outlet property="widgetCondition" destination="NRk-S4-4Nm" id="wkT-LR-JRg"/>
+                        <outlet property="widgetImage" destination="LBt-wG-aVy" id="6Ro-na-Ygc"/>
+                        <outlet property="widgetTemp" destination="ISX-Cf-wjB" id="u12-4f-Z67"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="411" y="278"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="facebook.png" width="32" height="32"/>
+    </resources>
+</document>
