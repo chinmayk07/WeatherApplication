@@ -130,7 +130,7 @@
     
     NSString *ifcondition = passedCoordinate;
     
-    //condition to check if selected locatons passes to view is null or not
+    ////condition to check if selected locatons passes to view is null or not
     if(ifcondition.length == 0)
     {
         [self conditions:location tag:1];
