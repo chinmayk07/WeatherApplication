@@ -244,7 +244,7 @@
         NSString *json = [ [NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",hourlyFilename] ofType:@"json"];
         NSData *jsonData = [NSData dataWithContentsOfFile:json ]; //options:kNilOptions error:nil];
         
-        //write file to device/documents folder
+        //write file to device/documents folder for search
         [jsonData writeToFile:filePath atomically:YES];
     }
 }
