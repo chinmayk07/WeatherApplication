@@ -79,9 +79,9 @@
     self.collectionView.dataSource = self;
     
     //to make collectionview transparent
-    /*self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.opaque = NO;
-    self.collectionView.backgroundView = nil;*/
+    self.collectionView.backgroundView = nil;
     
     [self loadUserLocation];
     
@@ -236,7 +236,6 @@
     //copy data from initial package to Documents folder
     else
     {
-        //file to write to
         NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json",hourlyFilename]];
         
         NSLog(@"FILEPATH IN WRITING JSON : %@",filePath);
@@ -366,12 +365,14 @@
     //After checking userDefaults change temp metric
     if([tempMetric isEqualToString:@"°F"]){
         
-        self.temperature.text = [NSString stringWithFormat:@"%@°F",tempF];
+        NSInteger tf = [tempF integerValue];
+        self.temperature.text = [NSString stringWithFormat:@"%ld°F",(long)tf];
         self.minmaxLabel.text = [NSString stringWithFormat:@"Feels Like : %@ °F",feelslikeF];
     }
     else
     {
-        self.temperature.text = [NSString stringWithFormat:@"%@°C",tempC];
+        NSInteger tf = [tempC integerValue];
+        self.temperature.text = [NSString stringWithFormat:@"%ld°C",(long)tf];
         self.minmaxLabel.text = [NSString stringWithFormat:@"Feels Like : %@ °C",feelslikeC];
     }
     
@@ -533,21 +534,20 @@
     {
         if(value <24)
         {
-            //NSLog(@"IT is night time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"night_sky.jpg"]];
+            [self imageName:@"night_sky.jpg"];
         }
     }
     if (value < 8)
     {
-        //NSLog(@"IT is night time");
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"night_sky.jpg"]];
+        [self imageName:@"night_sky.jpg"];
     }
     if (value > 7)
     {
         if(value < 12)
         {
             //NSLog(@"IT is morning time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"autumn.jpg"]];
+            //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"autumn.jpg"]];
+            [self imageName:@"autumn.jpg"];
         }
     }
     if (value > 11 )
@@ -555,7 +555,8 @@
         if(value < 16)
         {
             //NSLog(@"IT is afternoon time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunny.jpg"]];
+            //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunny.jpg"]];
+            [self imageName:@"sunny.jpg"];
         }
     }
     if (value > 15)
@@ -563,10 +564,21 @@
         if(value < 20)
         {
             //NSLog(@"IT is evening time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunset.jpg"]];
+            //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunset.jpg"]];
+            [self imageName:@"sunset.jpg"];
         }
     }
     //NSLog(@"SELECTED TIME FOR BACKGROUND CHANGE : %@",timef);
+}
+
+- (void)imageName :(NSString *)nameImage {
+    
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:nameImage] drawInRect:self.view.bounds];
+    UIImage *imagea = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:imagea];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

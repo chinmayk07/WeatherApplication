@@ -805,9 +805,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "/Users/mac-mini-3/Documents/FacebookSDK";
 				INFOPLIST_FILE = WeatherFinal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SJI.WeatherFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -828,7 +827,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WeatherFinal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SJI.WeatherFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -47,6 +47,12 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    //to make tableview transparent
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.opaque = NO;
+    self.tableView.backgroundView = nil;
+    
+    
     NSString *locationasdfasdf = self.locationfrommain;
     [self conditions];
     [self.tableView reloadData];    
@@ -56,7 +62,7 @@
     NSString *locattt= self.name_loc;
     NSLog(@"CURRENT LOCATION NAME : %@",locattt);
     NSString *backgroundtime = self.time;
-    [self background:backgroundtime];
+    [self bcakgroundChange:backgroundtime];
     defaultss = [NSUserDefaults standardUserDefaults];
     NSString *conditioncheck = [defaultss objectForKey:@"temp"];
     self.locationName.text = [NSString stringWithFormat:@"%@ ( in %@ )",locattt,conditioncheck];
@@ -66,9 +72,10 @@
     [self.tableView reloadData];
 }
 
-- (void)background:(NSString *)val {
+- (void)bcakgroundChange:(NSString *)timef {
     
-    value = [val intValue];
+    
+    value = [timef intValue];
     
     NSLog(@"TIME IN SELECTED CITY : %d",value);
     
@@ -76,21 +83,20 @@
     {
         if(value <24)
         {
-            //NSLog(@"IT is night time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"night_sky.jpg"]];
+            [self imageName:@"night_sky.jpg"];
         }
     }
-    if (value < 7)
+    if (value < 8)
     {
-        //NSLog(@"IT is night time");
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"night_sky.jpg"]];
+        [self imageName:@"night_sky.jpg"];
     }
     if (value > 7)
     {
         if(value < 12)
         {
             //NSLog(@"IT is morning time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"autumn.jpg"]];
+            //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"autumn.jpg"]];
+            [self imageName:@"autumn.jpg"];
         }
     }
     if (value > 11 )
@@ -98,7 +104,8 @@
         if(value < 16)
         {
             //NSLog(@"IT is afternoon time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunny.jpg"]];
+            //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunny.jpg"]];
+            [self imageName:@"sunny.jpg"];
         }
     }
     if (value > 15)
@@ -106,10 +113,23 @@
         if(value < 20)
         {
             //NSLog(@"IT is evening time");
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunset.jpg"]];
+            //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sunset.jpg"]];
+            [self imageName:@"sunset.jpg"];
         }
     }
+    //NSLog(@"SELECTED TIME FOR BACKGROUND CHANGE : %@",timef);
 }
+
+- (void)imageName :(NSString *)nameImage {
+    
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:nameImage] drawInRect:self.view.bounds];
+    UIImage *imagea = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:imagea];
+}
+
 
 - (void)conditions {
     
