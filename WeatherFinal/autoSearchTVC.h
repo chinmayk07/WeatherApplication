@@ -10,6 +10,7 @@
 
 @interface autoSearchTVC : UITableViewController <UISearchBarDelegate, NSURLSessionDataDelegate,NSURLSessionDelegate, NSURLSessionTaskDelegate,UISearchResultsUpdating>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBtn;
-//- (IBAction)searchBarButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *backButton;
+- (IBAction)backBarButton:(id)sender;
+
 @end

@@ -19,7 +19,9 @@
     
     int value;
     
+    //NsuserDefaults
     NSUserDefaults *defaultss;
+    NSString *conditionCheck;
     
     //Path of files
     NSArray *paths;
@@ -64,8 +66,9 @@
     NSString *backgroundtime = self.time;
     [self bcakgroundChange:backgroundtime];
     defaultss = [NSUserDefaults standardUserDefaults];
-    NSString *conditioncheck = [defaultss objectForKey:@"temp"];
-    self.locationName.text = [NSString stringWithFormat:@"%@ ( in %@ )",locattt,conditioncheck];
+    conditionCheck = [defaultss objectForKey:@"temp"];
+    NSLog(@"CONDITION CHECK : %@",conditionCheck);
+    self.locationName.text = [NSString stringWithFormat:@"%@ ( in %@ )",locattt,conditionCheck];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -303,14 +306,17 @@
     
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
+    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundView = [UIView new] ;
+    cell.selectedBackgroundView = [UIView new];
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[dayimage objectAtIndex:indexPath.row]]];
     [cell.conditionImage sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached];
     cell.dayName.text = [NSString stringWithFormat:@"%@",[dayname objectAtIndex:indexPath.row]];
     
-    NSString *conditioncheck = [defaultss objectForKey:@"temp"];
-    //NSLog(@"NSUSERDEFAULTS : %@",conditioncheck);
+    //NSLog(@"NSUSERDEFAULTS CONDITION CHECK : %@",conditionCheck);
     
-    if([conditioncheck isEqualToString:@"°C"])
+    if([conditionCheck isEqualToString:@"°C"])
     {
         cell.maxMintemp.text = [NSString stringWithFormat:@"Max :%@    Min :%@",[dayhighC objectAtIndex:indexPath.row],[daylowC objectAtIndex:indexPath.row]];
     }

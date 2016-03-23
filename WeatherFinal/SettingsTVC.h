@@ -14,6 +14,10 @@
 }
 
 @property (weak, nonatomic) IBOutlet UISwitch *switchforTemptoggle;
+@property (strong, nonatomic) IBOutlet UISwitch *switchforSpeedToggle;
+@property (strong, nonatomic) IBOutlet UISwitch *switchforVisibilityToggle;
+@property (strong, nonatomic) IBOutlet UISwitch *switchforPrecipitaionToggle;
+@property (strong, nonatomic) IBOutlet UISwitch *switchforPressureToggle;
 
 @property (weak, nonatomic) IBOutlet UILabel *tempMetricSelected;
 @property (weak, nonatomic) IBOutlet UILabel *windSpeedMetric;
@@ -22,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *pressureMetric;
 
 - (IBAction)toggleSwitch:(id)sender;
+
+- (IBAction)backBarButton:(id)sender;
+
 
 
 @end

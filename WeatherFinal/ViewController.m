@@ -40,6 +40,7 @@
     
     //NSUserdefaults strings
     NSString *tempMetric, *visiMetric, *preciMetric, *pressureMetric, *windSpeedMetric;
+    NSUserDefaults *defaultss;
     
     //Reachability test
     Reachability *internetConn;
@@ -62,8 +63,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Changes in API to Be Done only HERE...!!
-    apiKey = [NSString stringWithFormat:@"355f204a9db504ed"];
+    /*tempCresult = [[NSMutableArray alloc]init];
+    timeresult = [[NSMutableArray alloc]init];
+    imageresult = [[NSMutableArray alloc]init];
+    conditionresult = [[NSMutableArray alloc]init];
+    timeeresult = [[NSMutableArray alloc]init];
+    tempFresult = [[NSMutableArray alloc]init];*/
+    
+    //Changes in API KEY to Be Done only HERE...!!
+    apiKey = @"4ade17bd61a7a0f0";
     
     //applications document directory path
     paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -75,19 +83,15 @@
     passedCoordinate = self.selected_coordinates;
     NSLog(@"VIEW CONTROLLER COORDINATES RTY : %@",passedCoordinate);
     
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
     //to make collectionview transparent
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.opaque = NO;
     self.collectionView.backgroundView = nil;
+    [self.collectionView flashScrollIndicators];
     
     [self loadUserLocation];
     
-    [self.collectionView reloadData];
-    
-    NSUserDefaults *defaultss = [NSUserDefaults standardUserDefaults];
+    defaultss = [NSUserDefaults standardUserDefaults];
     
     tempMetric = [defaultss objectForKey:@"temp"];
     //NSLog(@"NSUSERDEFAULTS TEMP METRIC : %@",tempMetric);
@@ -95,6 +99,11 @@
     preciMetric = [defaultss objectForKey:@"precipitation"];
     pressureMetric = [defaultss objectForKey:@"pressure"];
     visiMetric = [defaultss objectForKey:@"visibility"];
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    [self.collectionView reloadData];
     
 }
 
@@ -464,7 +473,7 @@
 - (void)hourlyCall: (NSDictionary *)callDict {
     
     results = [callDict objectForKey:@"hourly_forecast"];
-    results112312312 = [[callDict objectForKey:@"hourly_forecast"] objectAtIndex:0];
+    //results112312312 = [[callDict objectForKey:@"hourly_forecast"] objectAtIndex:0];
     
     tempCresult = [[NSMutableArray alloc]init];
     timeresult = [[NSMutableArray alloc]init];
@@ -521,6 +530,53 @@
         //NSLog(@"TIMEEEEEEEEEEEEE : %@",timeselectes);
         [self bcakgroundChange:timeselectes];
     }
+    
+    //NSLog(@"TEMP ARRAY OUTSIDE FOR LOOP : %@",tempFresult);
+    //NSLog(@"TIME ARRAY OUTSIDE FOR LOOP : %@",timeresult);
+    //NSLog(@"IMAGE ARRAY : %@",imageresult);
+    //NSLog(@"CONDITION ARRAY : %@",conditionresult);
+    //NSLog(@"Imateasf :%@",timeeresult);
+    //NSLog(@"COUNT OF RESULTS %lu",(unsigned long)[result count]);
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return 20;
+}
+
+//Hourly Collection Data set to CollectionView
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"CellO";
+    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    //NSLog(@"TEMP ARRAY : %@",tempCresult);
+    //NSLog(@"TIME ARRAY : %@",timeresult);
+    //NSLog(@"IMAGE ARRAY : %@",imageresult);
+    //NSLog(@"CONDITION ARRAY : %@",conditionresult);
+    //NSLog(@"Imateasf :%@",timeeresult);
+    
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[imageresult objectAtIndex:indexPath.row]]];
+    [cell.imageConditions sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached];
+    
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[timeresult objectAtIndex:indexPath.row]];
+    cell.conditionLabel.text = [NSString stringWithFormat:@"%@",[conditionresult objectAtIndex:indexPath.row]];
+    
+    //After checking on NSuserdefaults change temp metric in collectionview
+    if([tempMetric isEqualToString:@"°F"]){
+        
+        cell.tempLabel.text = [NSString stringWithFormat:@"%@ °F",[tempFresult objectAtIndex:indexPath.row]];
+    }
+    else
+    {
+        cell.tempLabel.text = [NSString stringWithFormat:@"%@ °C",[tempCresult objectAtIndex:indexPath.row]];
+    }
+    return cell;
 }
 
 - (void)bcakgroundChange:(NSString *)timef {
@@ -579,39 +635,6 @@
     UIGraphicsEndImageContext();
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:imagea];
-}
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    return 20;
-}
-
-//Hourly Collection Data set to CollectionView
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"CellO";
-    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[imageresult objectAtIndex:indexPath.row]]];
-    [cell.imageConditions sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached];
-    
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[timeresult objectAtIndex:indexPath.row]];
-    cell.conditionLabel.text = [NSString stringWithFormat:@"%@",[conditionresult objectAtIndex:indexPath.row]];
-    
-    //After checking on NSuserdefaults change temp metric in collectionview
-    if([tempMetric isEqualToString:@"°F"]){
-        
-        cell.tempLabel.text = [NSString stringWithFormat:@"%@ °F",[tempFresult objectAtIndex:indexPath.row]];
-    }
-    else
-    {
-        cell.tempLabel.text = [NSString stringWithFormat:@"%@ °C",[tempCresult objectAtIndex:indexPath.row]];
-    }
-    return cell;
 }
 
 - (IBAction)FbSharing:(id)sender {

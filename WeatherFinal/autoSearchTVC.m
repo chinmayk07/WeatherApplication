@@ -245,4 +245,8 @@
     [datatask resume];
 }
 
+- (IBAction)backBarButton:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

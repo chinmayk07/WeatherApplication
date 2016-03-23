@@ -23,11 +23,9 @@
     
     //TempMetric settings
     defaults = [NSUserDefaults standardUserDefaults];
-    NSString *onLoadToggle = [defaults objectForKey:@"temp"];
-    NSLog(@"ON LOAD TOGGLE : %@",onLoadToggle);
-    self.tempMetricSelected.text = @"°C";
-    [self.switchforTemptoggle isOn];
-        
+    
+    [self InitialToggleCheck];
+    
     ////collapsing of tables
     sectionrows = [NSArray arrayWithObjects:@"5",@"1", nil];
     self.switchforTemptoggle.selected = false;
@@ -52,6 +50,76 @@
 - (BOOL)tableView:(UITableView *)tableView canCollapseSection:(NSInteger)section
 {
     return YES;
+}
+
+- (void)InitialToggleCheck
+{
+    NSString *onLoadTemp = [defaults objectForKey:@"temp"];
+    NSString *onLoadWindSpeed = [defaults objectForKey:@"windSpeed"];
+    NSString *onLoadVisibility = [defaults objectForKey:@"visibility"];
+    NSString *onLoadPrecipitation = [defaults objectForKey:@"precipitation"];
+    NSString *onLoadPressure = [defaults objectForKey:@"pressure"];
+    
+    //NSLog(@"ON LOAD TOGGLE temp : %@",onLoadTemp);
+    //NSLog(@"ON LOAD TOGGLE wind speed : %@",onLoadWindSpeed);
+    //NSLog(@"ON LOAD TOGGLE visibility : %@",onLoadVisibility);
+    //NSLog(@"ON LOAD TOGGLE precipitation : %@",onLoadPrecipitation);
+    //NSLog(@"ON LOAD TOGGLE pressure : %@",onLoadPressure);
+    
+    if([onLoadTemp isEqualToString:@"°C"])
+    {
+        self.tempMetricSelected.text = onLoadTemp;
+        [self.switchforTemptoggle setOn:YES animated:YES];
+    }
+    else
+    {
+        self.tempMetricSelected.text = onLoadTemp;
+        [self.switchforTemptoggle setOn:NO animated:YES];
+    }
+    
+    if([onLoadWindSpeed isEqualToString:@"windSpeed"])
+    {
+        self.windSpeedMetric.text = onLoadWindSpeed;
+        [self.switchforSpeedToggle setOn:YES animated:YES];
+    }
+    else
+    {
+        self.windSpeedMetric.text = onLoadWindSpeed;
+        [self.switchforSpeedToggle setOn:NO animated:YES];
+    }
+    
+    if([onLoadVisibility isEqualToString:@"visibility"])
+    {
+        self.visibilityMetric.text = onLoadVisibility;
+        [self.switchforVisibilityToggle setOn:YES animated:YES];
+    }
+    else
+    {
+        self.visibilityMetric.text = onLoadVisibility;
+        [self.switchforVisibilityToggle setOn:NO animated:YES];
+    }
+    
+    if([onLoadPrecipitation isEqualToString:@"precipitation"])
+    {
+        self.precipitaionMetric.text = onLoadPrecipitation;
+        [self.switchforPrecipitaionToggle setOn:YES animated:YES];
+    }
+    else
+    {
+        self.precipitaionMetric.text = onLoadPrecipitation;
+        [self.switchforPrecipitaionToggle setOn:NO animated:YES];
+    }
+    
+    if([onLoadPressure isEqualToString:@"pressure"])
+    {
+        self.pressureMetric.text = onLoadPressure;
+        [self.switchforPressureToggle setOn:YES animated:YES];
+    }
+    else
+    {
+        self.pressureMetric.text = onLoadPressure;
+        [self.switchforPressureToggle setOn:NO animated:YES];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -215,6 +283,11 @@
         default:
             break;
     }
+}
+
+- (IBAction)backBarButton:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
